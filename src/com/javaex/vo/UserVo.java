@@ -13,6 +13,13 @@ public class UserVo {
 		
 	}
 	
+	public UserVo( int no,  String password, String name, String gender) {
+		this.no = no;
+		this.password = password;
+		this.name = name;
+		this.gender = gender;
+	}
+	
 	public UserVo( String id, String name, String password, String gender) {
 		this.id = id;
 		this.name = name;

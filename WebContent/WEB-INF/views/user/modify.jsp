@@ -3,8 +3,7 @@
 <%@ page import="com.javaex.vo.UserVo" %>
 
 <%
-   UserVo authUser = (UserVo)session.getAttribute("authUser");
-   System.out.println(authUser);
+   UserVo userVo = (UserVo)request.getAttribute("userVo");
 %>
 
 <!DOCTYPE html>
@@ -79,36 +78,41 @@
             <div id="user">
                <div id="modifyForm">
                   <form action="/mysite2/user" method="get">
-                     <input type ="hidden" name ="action" value="modify">
-                     <input type ="hidden" name="no" value="<%=authUser.getNo()%>">
-                     <input type ="hidden" name="id"value="<%=authUser.getId()%>">
+                  <input type="text" name="action" value="modify">
                      <!-- 아이디 -->
                      <div class="form-group">
                         <label class="form-text" for="input-uid">아이디</label> 
-                        <span class="text-large bold"><%=authUser.getId()%></span>
+                        <span class="text-large bold"><%=userVo.getId() %></span>
                      </div>
    
                      <!-- 비밀번호 -->
                      <div class="form-group">
                         <label class="form-text" for="input-pass">패스워드</label> 
-                        <input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"   >
+                        <input type="text" id="input-pass" name="password" value="<%=userVo.getPassword() %>" placeholder="비밀번호를 입력하세요"   >
                      </div>
    
                      <!-- 이메일 -->
                      <div class="form-group">
                         <label class="form-text" for="input-name">이름</label> 
-                        <input type="text" id="input-name" name="name" value="" placeholder="이름을 입력하세요">
+                        <input type="text" id="input-name" name="name" value="<%=userVo.getName() %>" placeholder="이름을 입력하세요">
                      </div>
-   
-                     <!-- //나이 -->
+   					
+   					  <!-- //나이 -->
                      <div class="form-group">
                         <span class="form-text">성별</span> 
-                        
-                        <label for="rdo-male">남</label> 
-                        <input type="radio" id="rdo-male" name="gender" value="male" > 
-                        
+   					
+   					<%if(userVo.getGender().equals("male")){%>
+						<label for="rdo-male">남</label> 
+                        <input type="radio" id="rdo-male" name="gender" value="male" checked="checked" >   
                         <label for="rdo-female">여</label> 
-                        <input type="radio" id="rdo-female" name="gender" value="female" > 
+                        <input type="radio" id="rdo-female" name="gender" value="female" >     						
+   					<%}else {%>
+   					<label for="rdo-male">남</label> 
+                        <input type="radio" id="rdo-male" name="gender" value="male" checked="checked" >   
+						<label for="rdo-female">여</label> 
+                        <input type="radio" id="rdo-female" name="gender" value="female" checked ="checked" >    					
+   					<% }%>
+   					
    
                      </div>
    
