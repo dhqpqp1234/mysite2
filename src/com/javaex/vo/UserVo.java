@@ -20,7 +20,7 @@ public class UserVo {
 		this.gender = gender;
 	}
 	
-	public UserVo( String id, String name, String password, String gender) {
+	public UserVo( String id,  String password, String name, String gender) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
