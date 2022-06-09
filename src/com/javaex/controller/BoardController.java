@@ -86,7 +86,7 @@ public class BoardController extends HttpServlet {
 			
 			
 			BoardDao boardDao = new BoardDao();
-			BoardVo boardVo = boardDao.getUser(no);
+			BoardVo boardVo = new BoardVo(no, title , content);			
 			int count = boardDao.update(boardVo);
 			request.setAttribute("boardVo", boardVo);
 			
