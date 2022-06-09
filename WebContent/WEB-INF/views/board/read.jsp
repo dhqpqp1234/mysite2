@@ -90,9 +90,9 @@
 								
 							
 							<a id="btn_modify" href="/mysite2/bdc?action=list">목록</a>
-							
+							<c:if test="${authUser.name}">
 							<a id="btn_modify" href="/mysite2/bdc?action=modifyForm&no=${boardVo.no}">수정</a>
-							
+							</c:if>
 							
 						</form>
 						<!-- //form -->

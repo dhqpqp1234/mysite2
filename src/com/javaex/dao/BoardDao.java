@@ -138,15 +138,16 @@ public class BoardDao {
            query += "         ,reg_date ";
            query += "         ,user_no ";
            query += " from board b , users u ";
-           query += " where user_no = u.no ";
+           query += " where b.user_no = u.no ";
+           query += " and u.no = ? ";
 
            //바인딩
            pstmt = conn.prepareStatement(query);
+           pstmt.setInt(1, no);
            //실행
            rs= pstmt.executeQuery();
            //결과처리
            while(rs.next()) {
-             int bno = rs.getInt("no");
               String title = rs.getString("title");
               String content = rs.getString("content");
               String name = rs.getString("name");
@@ -154,7 +155,7 @@ public class BoardDao {
               String regDate = rs.getString("reg_date");
               int userNo = rs.getInt("user_no");
               
-              bVo = new BoardVo(bno,title,content,name,hit,regDate,userNo);
+              bVo = new BoardVo(no,title,content,name,hit,regDate,userNo);
               
            }
         } catch (SQLException e) {
@@ -209,6 +210,31 @@ public class BoardDao {
            
            // 4.결과처리
            System.out.println(count + "건이 수정되었습니다");
+        } catch (SQLException e) {
+           System.out.println("error:" + e);
+        }
+        close();
+
+        return count;
+     }
+    
+    public int uphit(int no) {
+        int count = -1;
+        this.getConnecting();
+        try {
+           // 3. SQL문준비/ 바인딩/ 실행
+           // SQL문준비
+          String query = "";
+          query += " update board ";
+          query += " set hit = hit +1 ";
+          query += " where no = ? ";
+           
+          pstmt = conn.prepareStatement(query);
+          pstmt.setInt(1, no);
+          
+           count = pstmt.executeUpdate();
+           // 4.결과처리
+           System.out.println("조회수가"+ no + "건이 조회되었습니다");
         } catch (SQLException e) {
            System.out.println("error:" + e);
         }
